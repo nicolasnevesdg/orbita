@@ -20,7 +20,7 @@ Sem configuração, o app funciona em modo local e informa isso. Login não é s
 
 ## GitHub e nicolasneves.com.br/orbita
 
-O domínio principal já usa GitHub Pages. O fluxo `.github/workflows/pages.yml` publica a pasta `dist`; em um repositório de projeto chamado `orbita`, o endereço esperado é `https://nicolasneves.com.br/orbita/`, sem substituir o portfólio da raiz. A configuração do Firebase incluída no repositório é pública e segura para o navegador; nunca adicione conta de serviço ou tokens.
+O código está em `https://github.com/nicolasnevesdg/orbita`. O fluxo `.github/workflows/pages.yml` publica a pasta `dist` em `https://nicolasnevesdg.github.io/orbita/`. A mesma pasta também foi acrescentada como `orbita/` no repositório do portfólio, deixando o endereço principal ativo em `https://nicolasneves.com.br/orbita/` sem substituir a página inicial. O remoto Git `portfolio` aponta para esse segundo repositório para facilitar futuras atualizações. A configuração do Firebase incluída no repositório é pública e segura para o navegador; nunca adicione conta de serviço ou tokens.
 
 ## Importar planos preparados no ChatGPT
 
