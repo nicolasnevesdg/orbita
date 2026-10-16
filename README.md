@@ -14,7 +14,7 @@ O projeto dedicado é `orbita-nicolasneves`. O aplicativo Web está configurado 
 
 A versão publicada no Firebase Hosting está em https://orbita-nicolasneves.web.app. Para publicar uma atualização: `npx firebase-tools deploy --only hosting --project orbita-nicolasneves`.
 
-Antes de usar contas e sincronização, habilite E-mail/senha e Google em Authentication → Método de login e publique `firestore.rules`. Os itens ficam em `users/{uid}/items/{id}`; as regras limitam leitura, escrita e exclusão ao próprio usuário e validam todos os campos aceitos pelo aplicativo.
+E-mail/senha e Google estão habilitados pelo bloco `auth` de `firebase.json`; os domínios do Firebase Hosting e `nicolasneves.com.br` estão autorizados. Os itens ficam em `users/{uid}/items/{id}`; as regras publicadas limitam leitura, escrita e exclusão ao próprio usuário e validam todos os campos aceitos pelo aplicativo.
 
 Sem configuração, o app funciona em modo local e informa isso. Login não é simulado. Ao entrar, o app troca para os dados da conta; itens locais ficam separados, com botão para copiá-los à conta. Ao sair, retorna ao modo local. Preferências visuais ficam neste navegador. Escritas na nuvem só são informadas como salvas após confirmação do Firestore. Não há fila offline implementada.
 
@@ -36,7 +36,7 @@ Exporte ou use “Modelo JSON” em Configurações. Formato: `{ "version": 1, "
 - Eventos são limitados a um dia; repetição, subtarefas, categorias personalizadas, metas de longo prazo e notificações de sistema ainda não foram implementadas. Lembretes são itens visuais, sem alerta com a página fechada.
 - O seletor oferece emojis frequentes e campo livre: use Win + ponto para o catálogo completo do sistema, ou deixe vazio.
 - GugetFin e acesso direto do ChatGPT não estão conectados. Hoje é possível pedir um JSON e importar. Uma futura API autenticada deve limitar acesso à sua conta, permitir revogação e registrar alterações; nunca colocar credenciais administrativas no front-end.
-- Firebase não foi provisionado, portanto login e sincronização não foram validados de ponta a ponta. Sem Firebase ativo, apagar dados do navegador remove itens locais: use exportação como backup.
+- O Firebase está provisionado. A criação de uma conta real não faz parte dos testes automatizados; antes de depender exclusivamente da nuvem, faça um primeiro login e mantenha uma exportação JSON como backup.
 
 ## Organização
 

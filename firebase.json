@@ -1,1 +1,37 @@
-{"firestore":{"rules":"firestore.rules"},"hosting":{"public":"dist","ignore":["firebase.json","**/.*","**/node_modules/**"],"headers":[{"source":"**/*.js","headers":[{"key":"Cache-Control","value":"no-cache"}]}]}}
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "auth": {
+    "providers": {
+      "emailPassword": true,
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "Órbita",
+        "supportEmail": "onicolasneves@gmail.com",
+        "authorizedRedirectUris": [
+          "https://orbita-nicolasneves.web.app/",
+          "https://nicolasneves.com.br/orbita/"
+        ]
+      }
+    }
+  },
+  "hosting": {
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "headers": [
+      {
+        "source": "**/*.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      }
+    ]
+  }
+}
