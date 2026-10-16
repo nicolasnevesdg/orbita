@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+ match /databases/{database}/documents {
+  function owner(uid) { return request.auth != null && request.auth.uid == uid; }
+  function validItem(id) {
+   let d = request.resource.data;
+   return d.keys().hasAll(['id','title','date','type','category','time','endTime','priority','color','emoji','notes','progress','done','updatedAt'])
+    && d.keys().hasOnly(['id','title','date','type','category','time','endTime','priority','color','emoji','notes','progress','done','updatedAt'])
+    && d.id == id && d.id is string && d.id.size() <= 100
+    && d.title is string && d.title.size() > 0 && d.title.size() <= 160
+    && d.date is string && d.date.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+    && d.type in ['task','event','goal','reminder'] && d.category in ['personal','work','study','health']
+    && d.time is string && (d.time == '' || d.time.matches('^([01][0-9]|2[0-3]):[0-5][0-9]$'))
+    && d.endTime is string && (d.endTime == '' || (d.time != '' && d.endTime.matches('^([01][0-9]|2[0-3]):[0-5][0-9]$') && d.endTime >= d.time))
+    && d.priority in ['low','normal','high']
+    && d.color is string && d.color.matches('^#[0-9a-fA-F]{6}$')
+    && d.emoji is string && d.emoji.size() <= 16 && d.notes is string && d.notes.size() <= 2000
+    && d.done is bool && d.progress is number && d.progress >= 0 && d.progress <= 100
+    && d.updatedAt is string && d.updatedAt.size() <= 40;
+  }
+  match /users/{uid}/items/{itemId} {
+   allow read, delete: if owner(uid);
+   allow create, update: if owner(uid) && validItem(itemId);
+  }
+ }
+}

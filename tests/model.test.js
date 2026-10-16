@@ -1,0 +1,6 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {normalizeItem,parseImport,dayKey,parseDay,escapeHTML} from '../dist/model.js';
+const base={title:'Entregar TFG',date:'2026-10-16',type:'task',category:'study'};
+test('datas mantêm o dia local e recusam datas inexistentes',()=>{assert.equal(dayKey(parseDay(base.date)),base.date);assert.throws(()=>normalizeItem({...base,date:'2026-02-30'}));assert.throws(()=>normalizeItem({...base,time:'25:00'}));assert.throws(()=>normalizeItem({...base,time:'14:00',endTime:'13:00'}))});
+test('importação valida o arquivo inteiro e não duplica IDs',()=>{const item=normalizeItem({...base,id:'a'});const r=parseImport(JSON.stringify({version:1,items:[item,item,{...item,id:'b'}]}),[item]);assert.equal(r.items.length,1);assert.equal(r.skipped,2);assert.throws(()=>parseImport(JSON.stringify({version:1,items:[item,{...item,id:'b',date:'errada'}]})));assert.throws(()=>parseImport('{"version":2,"items":[]}'))});
+test('conteúdo importado não injeta HTML, IDs ou CSS',()=>{assert.equal(escapeHTML('<img src=x>'),'&lt;img src=x&gt;');assert.throws(()=>normalizeItem({...base,id:'a" onclick="x'}));assert.throws(()=>normalizeItem({...base,color:'red;display:none'}));assert.throws(()=>normalizeItem({...base,progress:NaN}));assert.equal(normalizeItem({...base,emoji:''}).emoji,'')});
