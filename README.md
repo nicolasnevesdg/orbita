@@ -28,7 +28,7 @@ Exporte ou use “Modelo JSON” em Configurações. Formato: `{ "version": 1, "
 
 ## Decisões e limites
 
-- Fundo preto absoluto e acento verde suave. A interface usa DM Sans; o relógio é desenhado em sete segmentos chanfrados diretamente em CSS, para permanecer fiel e nítido em qualquer resolução.
+- Fundo preto absoluto e acento verde suave. A interface usa DM Sans; o relógio usa a fonte oficial DSEG7 Classic Bold Italic, incorporada localmente em WOFF2 sob a SIL Open Font License 1.1. A licença está em `dist/assets/fonts/DSEG-LICENSE.txt`.
 - A escala inicial é 125%. Em Configurações → Escala da interface, escolha de 100% a 200%. Isso corrige monitores pequenos de alta resolução, como o celular usado pelo spacedesk, sem depender do zoom do navegador.
 - Navegação e brilho nas laterais aparecem com mouse ou foco de teclado. Em toque ficam visíveis. F ou botão ativa tela cheia quando suportado; F11 também funciona no navegador do PC.
 - Brilho é uma camada preta, não altera o brilho físico do dispositivo.
